@@ -35,6 +35,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         NavigationView navigationView = (NavigationView) findViewById(R.id.l_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
         NavigationView r_navigationView = (NavigationView) findViewById(R.id.r_nav_view);
         r_navigationView.setNavigationItemSelectedListener(this);
 
