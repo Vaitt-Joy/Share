@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/l_nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@mipmap/vz_left_bg"
+        app:headerLayout="@layout/nav_header_main"
+        android:tag="LEFT"
+        app:menu="@menu/activity_main_drawer" />
+
+    <!--<fragment
+        android:id="@+id/id_right_menu"
+        android:name="com.doshare.share.ui.fra.MenuRightFragment"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:tag="RIGHT" />-->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/r_nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        app:headerLayout="@layout/nav_header_main"
+        android:tag="RIGHT" android:background="@mipmap/vz_right_bg"
+        app:menu="@menu/activity_main_drawer" />
+
+</android.support.v4.widget.DrawerLayout>
