@@ -13,12 +13,12 @@
 
     <android.support.design.widget.NavigationView
         android:id="@+id/l_nav_view"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@mipmap/vz_left_bg"
-        app:headerLayout="@layout/nav_header_main"
         android:tag="LEFT"
+        app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer" />
 
     <!--<fragment
@@ -30,11 +30,12 @@
         android:tag="RIGHT" />-->
     <android.support.design.widget.NavigationView
         android:id="@+id/r_nav_view"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        app:headerLayout="@layout/nav_header_main"
-        android:tag="RIGHT" android:background="@mipmap/vz_right_bg"
-        app:menu="@menu/activity_main_drawer" />
+        android:tag="RIGHT"
+        android:fadeScrollbars="true"
+        android:background="@mipmap/vz_right_bg"
+        app:headerLayout="@layout/nav_right_layout" />
 
 </android.support.v4.widget.DrawerLayout>

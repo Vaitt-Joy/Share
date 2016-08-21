@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.Window;
 
 import com.doshare.share.MyApp;
-import com.doshare.share.utils.StatusBarCompat;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         context = new WeakReference<Activity>(this);
         mApplication.pushTask(context);
         initView(mContextView);
-        StatusBarCompat.compat(this);
+        //StatusBarCompat.compat(this);
         initData();
         initEvent();
     }

@@ -3,6 +3,8 @@ package com.doshare.share;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.doshare.share.di.component.AppComponent;
 import com.doshare.share.di.component.DaggerAppComponent;
@@ -17,13 +19,28 @@ import java.util.Stack;
 public class MyApp extends Application {
 
     public static final String TAG = "MyApp";
+    /**
+     * 对外提供整个应用生命周期的Context
+     **/
+    private static Context instance;
+
+    private static Thread mMainThread;
+    private static Looper mMainLooper;
+    private static Handler mHandler;
+
     private AppComponent mAppComponent;
 
     private final Stack<WeakReference<Activity>> activitys = new Stack<WeakReference<Activity>>();
+    private static long mMainTreadId;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
+        mMainThread = Thread.currentThread();
+        mMainTreadId = android.os.Process.myTid();
+        mMainLooper = getMainLooper();
+        mHandler = new Handler();
         initBmob();
         mAppComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
         mAppComponent.inject(this);
@@ -36,6 +53,31 @@ public class MyApp extends Application {
 //        //新浪微博 appkey appsecret
 //        PlatformConfig.setWeixin("wx5a714face5a6640d", "03ac8c788f750d68a73c4742da77bb23");
 //        //微信 appid appsecret
+    }
+
+    /**
+     * 对外提供Application Context
+     *
+     * @return
+     */
+    public static Context getContext() {
+        return instance;
+    }
+
+    public static Thread getMainThread() {
+        return mMainThread;
+    }
+
+    public static long getMainTreadId() {
+        return mMainTreadId;
+    }
+
+    public Looper getMainLooper() {
+        return mMainLooper;
+    }
+
+    public static Handler getHandler() {
+        return mHandler;
     }
 
     public void initBmob(){

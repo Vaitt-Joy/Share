@@ -1,5 +1,7 @@
 package com.doshare.share;
 
+import android.graphics.Color;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -8,13 +10,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
 import com.doshare.share.ui.act.base.BaseActivity;
+import com.doshare.share.utils.ToolUI;
+import com.doshare.share.widget.WaveSwipeRefreshLayout.WaveSwipeRefreshLayout;
 import com.nineoldandroids.view.ViewHelper;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, WaveSwipeRefreshLayout.OnRefreshListener {
 
     private DrawerLayout mDrawer;
+
+    private WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
+    private ListView mListView;
 
     @Override
     public int bindLayout() {
@@ -30,15 +39,27 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.setDrawerListener(toggle);
+        mDrawer.setScrimColor(Color.TRANSPARENT);
         toggle.syncState();
+
+        /************* 下拉控件*************/
+        mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) findViewById(R.id.main_wave);
+        mWaveSwipeRefreshLayout.setColorSchemeColors(Color.GRAY);
+        mWaveSwipeRefreshLayout.setOnRefreshListener(this);
+        mWaveSwipeRefreshLayout.setWaveColor(ToolUI.getColor(R.color.orange));
+        /**************************/
+
+        mListView = (ListView) findViewById(R.id.main_list);
+
+//        findViewById(R.id.button_of_wave_color).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mWaveSwipeRefreshLayout.setWaveColor(0xFF000000+new Random().nextInt(0xFFFFFF)); // Random assign
+//            }
+//        });
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.l_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-        NavigationView r_navigationView = (NavigationView) findViewById(R.id.r_nav_view);
-        r_navigationView.setNavigationItemSelectedListener(this);
-
     }
 
     @Override
@@ -64,15 +85,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     ViewHelper.setPivotY(mContent, mContent.getMeasuredHeight() / 2);
                     mContent.invalidate();
                     ViewHelper.setScaleX(mContent, rightScale);
-                    //ViewHelper.setScaleY(mContent, rightScale);
+                    //ViewHelper.setScaleY(mDrawer.getChildAt(1), ToolUI.getStatusBarHeight(getBaseContext()));
                 } else {
                     //ViewHelper.setAlpha(mMenu, 0.6f + 0.4f * (1 - scale));
                     ViewHelper.setTranslationX(mContent, -mMenu.getMeasuredWidth() * slideOffset);
-                    ViewHelper.setPivotX(mContent, mContent.getMeasuredWidth());
-                    //ViewHelper.setPivotY(mContent, mContent.getMeasuredHeight() / 2);
+                    //ViewHelper.setPivotX(mContent, mContent.getMeasuredWidth());
                     mContent.invalidate();
-                    ViewHelper.setScaleX(mContent, rightScale);
+                   // ViewHelper.setScaleX(mContent, rightScale);
                     //ViewHelper.setScaleY(mContent, rightScale);
+
                 }
             }
 
@@ -131,7 +152,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
@@ -172,5 +192,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mWaveSwipeRefreshLayout.setRefreshing(false);
+            }
+        }, 3000);
     }
 }
