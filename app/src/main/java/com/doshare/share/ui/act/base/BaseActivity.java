@@ -35,8 +35,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
 
 
     @Override
-    protected void onCreate(Bundle arg0) {
-        super.onCreate(arg0);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mContextView = LayoutInflater.from(this).inflate(bindLayout(), null);
@@ -47,13 +47,13 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         //将当前Activity压入栈
         context = new WeakReference<Activity>(this);
         mApplication.pushTask(context);
-        initView(mContextView);
+        initView(savedInstanceState);
         //StatusBarCompat.compat(this);
         initData();
         initEvent();
     }
 
-    public abstract void initView(View view);
+    public abstract void initView(Bundle savedInstanceState);
 
     protected void initEvent() {
 

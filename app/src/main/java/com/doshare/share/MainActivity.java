@@ -1,6 +1,7 @@
 package com.doshare.share;
 
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -31,7 +32,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @Override
-    public void initView(View view) {
+    public void initView(Bundle savedInstanceState) {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         toolbar.setTitle("首页");setSupportActionBar(toolbar);

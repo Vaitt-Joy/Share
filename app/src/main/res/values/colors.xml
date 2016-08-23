@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primary">#00FFFFFF</color>
-    <color name="primary_dark">#1976D2</color>
+    <color name="primary_dark">@color/main_blue</color>
     <color name="primary_light">#BBDEFB</color>
     <color name="accent">#03A9F4</color>
     <color name="primary_text">#212121</color>
@@ -9,6 +9,19 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
 
     <color name="orange">#FF5722</color>
+
+    <!--颜色设计颜色-->
+    <color name="main_blue">#18A3FF</color>
+    <color name="main_blue_deep">#27B1F2</color>
+    <color name="main_bg">#EDEDED</color>
+    <color name="main_other_green">#4FD04C</color>
+    <color name="main_other_orange">#F5A623</color>
+    <color name="main_other_red">#FF6666</color>
+
+    <color name="main_text_black">@color/black</color>
+    <color name="main_text_gray">#8000</color>
+    <!--颜色设计颜色-->
 </resources>

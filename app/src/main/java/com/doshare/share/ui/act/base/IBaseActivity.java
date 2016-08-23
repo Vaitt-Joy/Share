@@ -1,6 +1,6 @@
 package com.doshare.share.ui.act.base;
 
-import android.view.View;
+import android.os.Bundle;
 
 /**
  * Activity接口
@@ -16,7 +16,7 @@ public interface IBaseActivity {
 	/**
 	 * 初始化控件
 	 */
-	public void initView(final View view);
+	public void initView(Bundle savedInstanceState);
 	
 	/**
 	 * 暂停恢复刷新相关操作（onResume方法中调用）

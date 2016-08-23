@@ -15,6 +15,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppSplashTheme" parent="AppTheme.NoActionBar">
+        <!--<item name="android:windowBackground">@color/main_text_gray</item>-->
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@color/main_blue</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
         <item name="android:background">@android:color/transparent</item>
     </style>
