@@ -33,6 +33,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        setContentView(bindLayout());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         toolbar.setTitle("首页");setSupportActionBar(toolbar);

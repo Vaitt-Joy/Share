@@ -20,7 +20,7 @@ public class LoginActivityPresenterImpl implements LoginActivityPresenter {
 
     @Override
     public void login(Context context, String userName, String password) {
-        if (userName.equals("")||userName.length()<6){
+        if (userName.equals("")){
             ToolToast.showLong("请校验用户名");
             return;
         }if (password.equals("")||password.length()<6){

@@ -23,7 +23,7 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
-
+        setContentView(bindLayout());
     }
 
     @Override

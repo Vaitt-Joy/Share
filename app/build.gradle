@@ -26,6 +26,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/maven/com.squareup.okio/okio/pom.xml'
+        exclude 'META-INF/maven/com.squareup.okio/okio/pom.properties'
+    }
 }
 
 dependencies {
@@ -33,11 +38,10 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
-    compile 'com.jakewharton:butterknife:7.0.1'
     /*dagger2*/
-    apt 'com.google.dagger:dagger-compiler:2.5'
-    compile 'com.google.dagger:dagger:2.5'
-    provided 'javax.annotation:jsr250-api:1.0'
+    apt 'com.google.dagger:dagger-compiler:2.2'
+    compile 'com.google.dagger:dagger:2.2'
+    compile 'com.android.support:recyclerview-v7:23.3.0'
     /*retrofit*/
     compile 'com.squareup.retrofit2:retrofit:2.0.1'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.1'
@@ -46,5 +50,7 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.2'
     compile 'io.reactivex:rxandroid:1.1.0'
     compile files('libs/nineoldandroids-2.4.0.jar')
-    compile 'com.jakewharton:butterknife:8.2.1'
+
+    /*butterknife*/
+    compile 'com.jakewharton:butterknife:7.0.1'
 }

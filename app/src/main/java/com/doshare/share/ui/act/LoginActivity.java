@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -24,7 +23,7 @@ import com.doshare.share.utils.ToolUI;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -35,26 +34,23 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
 
     @Inject
     LoginActivityPresenter presenter;
-
-    @BindView(R.id.login_progress)
+    @Bind(R.id.login_progress)
     ProgressBar loginProgress;
-    @BindView(R.id.username)
+    @Bind(R.id.username)
     EditText username;
-    @BindView(R.id.password)
+    @Bind(R.id.password)
     EditText password;
-    @BindView(R.id.sign_in_button)
+    @Bind(R.id.sign_in_button)
     Button signInButton;
-    @BindView(R.id.login_error)
+    @Bind(R.id.login_error)
     TextView loginError;
-    @BindView(R.id.register_now)
+    @Bind(R.id.register_now)
     TextView registerNow;
-    @BindView(R.id.email_login_form)
-    LinearLayout emailLoginForm;
-    @BindView(R.id.qq_login)
+    @Bind(R.id.qq_login)
     ImageView qqLogin;
-    @BindView(R.id.weixin_login)
+    @Bind(R.id.weixin_login)
     ImageView weixinLogin;
-    @BindView(R.id.weibo_login)
+    @Bind(R.id.weibo_login)
     ImageView weiboLogin;
 
 
@@ -65,9 +61,9 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        setContentView(bindLayout());
         ButterKnife.bind(this);
         setupComponent(((MyApp) getApplicationContext()).getAppComponent());
-        ToolToast.showLong("hahahah");
     }
 
     @Override
@@ -105,21 +101,21 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
      * 微博登陆
      */
     private void weiBoLogin() {
-
+        ToolToast.showLong("weiBoLogin");
     }
 
     /**
      * 微信登陆
      */
     private void weiXinLogin() {
-
+        ToolToast.showLong("weiXinLogin");
     }
 
     /**
      * qq登陆
      */
     private void qqLogin() {
-
+        ToolToast.showLong("qqLogin");
     }
 
     @OnClick({R.id.sign_in_button, R.id.login_error, R.id.register_now, R.id.qq_login, R.id.weixin_login, R.id.weibo_login})
@@ -129,7 +125,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
                 qqLogin();
                 break;
             case R.id.weixin_login:
-                weiXinLogin();
+               weiXinLogin();
                 break;
             case R.id.weibo_login:
                 weiBoLogin();
