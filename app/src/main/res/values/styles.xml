@@ -4,8 +4,8 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@android:color/transparent</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/accent</item>
+        <item name="colorPrimaryDark">@color/primary_light</item>
+        <item name="colorAccent">@color/primary_dark</item>
         <item name="android:textColorPrimary">@color/accent</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
     </style>
@@ -18,7 +18,11 @@
     <style name="AppSplashTheme" parent="AppTheme.NoActionBar">
         <!--<item name="android:windowBackground">@color/main_text_gray</item>-->
         <item name="android:windowFullscreen">true</item>
-        <item name="android:windowBackground">@color/main_blue</item>
+        <item name="android:windowBackground">@mipmap/splash</item>
+    </style>
+    <style name="AppLoginTheme" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >

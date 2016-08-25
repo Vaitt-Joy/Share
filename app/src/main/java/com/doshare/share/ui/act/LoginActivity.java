@@ -52,16 +52,13 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
     ImageView weixinLogin;
     @Bind(R.id.weibo_login)
     ImageView weiboLogin;
+    @Bind(R.id.cancel_login)
+    ImageView cancleLogin;
 
-
-    @Override
-    public int bindLayout() {
-        return R.layout.activity_login;
-    }
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        setContentView(bindLayout());
+        setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         setupComponent(((MyApp) getApplicationContext()).getAppComponent());
     }
@@ -118,7 +115,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
         ToolToast.showLong("qqLogin");
     }
 
-    @OnClick({R.id.sign_in_button, R.id.login_error, R.id.register_now, R.id.qq_login, R.id.weixin_login, R.id.weibo_login})
+    @OnClick({R.id.sign_in_button, R.id.login_error, R.id.register_now, R.id.qq_login, R.id.weixin_login, R.id.weibo_login,R.id.cancel_login})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.qq_login:
@@ -136,6 +133,9 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
             case R.id.login_error:
                 break;
             case R.id.register_now:
+                break;
+            case R.id.cancel_login:
+                ToolUI.nextPage(this,MainActivity.class);
                 break;
         }
     }

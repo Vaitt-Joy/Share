@@ -18,4 +18,7 @@
     <string name="str_login_error">登录遇到问题</string>
     <string name="str_register_now">立即注册</string>
     <string name="str_or">or</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_home_fragment">hello_home_fragment</string>
 </resources>

@@ -26,8 +26,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.act.LoginActivity"
-            android:label="@string/title_activity_login" />
+            android:name=".ui.act.LoginActivity" android:theme="@style/AppLoginTheme"
+             />
         <activity android:name=".ui.act.SplashActivity" android:theme="@style/AppSplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

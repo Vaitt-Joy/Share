@@ -17,13 +17,8 @@ public class SplashActivity extends BaseActivity {
     private Handler mHandler;
 
     @Override
-    public int bindLayout() {
-        return R.layout.activity_splash;
-    }
-
-    @Override
     public void initView(Bundle savedInstanceState) {
-        setContentView(bindLayout());
+        setContentView(R.layout.activity_splash);
     }
 
     @Override

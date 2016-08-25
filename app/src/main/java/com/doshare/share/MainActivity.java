@@ -27,13 +27,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private ListView mListView;
 
     @Override
-    public int bindLayout() {
-        return R.layout.activity_main;
-    }
-
-    @Override
     public void initView(Bundle savedInstanceState) {
-        setContentView(bindLayout());
+        setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         toolbar.setTitle("首页");setSupportActionBar(toolbar);
