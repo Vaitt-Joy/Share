@@ -3,7 +3,6 @@ package com.doshare.share.mvp.presenter;
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.doshare.share.domain.WeatherApiService;
 import com.doshare.share.mvp.views.HomeView;
 
 import java.util.List;
@@ -15,11 +14,11 @@ import java.util.List;
  */
 public class HomeViewPresenterImpl implements HomeViewPresenter {
     private final HomeView homeView;
-    private final WeatherApiService weatherApiService;
+    //private final WeatherApiService weatherApiService;
 
-    public HomeViewPresenterImpl(HomeView homeView, WeatherApiService weatherApiService) {
+    public HomeViewPresenterImpl(HomeView homeView) {
         this.homeView = homeView;
-        this.weatherApiService = weatherApiService;
+       // this.weatherApiService = weatherApiService;
     }
 
 

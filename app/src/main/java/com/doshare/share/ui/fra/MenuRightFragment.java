@@ -12,6 +12,6 @@ import com.doshare.share.ui.fra.base.BaseFragment;
 public class MenuRightFragment extends BaseFragment {
     @Override
     protected View initView() {
-        return View.inflate(getContext(),R.layout.menu_layout_right, null);
+        return View.inflate(getContext(),R.layout.nav_right_layout, null);
     }
 }

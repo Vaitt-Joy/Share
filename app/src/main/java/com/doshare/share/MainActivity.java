@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,17 +16,37 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.doshare.share.ui.act.base.BaseActivity;
+import com.doshare.share.ui.fra.HomeFragment;
+import com.doshare.share.ui.fra.MenuRightFragment;
+import com.doshare.share.ui.fra.base.FragmentFactory;
 import com.doshare.share.utils.ToolUI;
 import com.doshare.share.widget.WaveSwipeRefreshLayout.WaveSwipeRefreshLayout;
 import com.nineoldandroids.view.ViewHelper;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, WaveSwipeRefreshLayout.OnRefreshListener {
+
+    public final int FRAGMENT_RIGHT = 0;// 右菜单
+    public final int FRAGMENT_HOME = 1;// 主页
+    public final int FRAGMENT_FIND = 2;
+    public final int FRAGMENT_ME = 4;
+    private final int FRAGMENT_NICKNAME = 5;
+    private final int FRAGMENT_INSTRUCTIONS = 7;
+    private final int FRAGMENT_ABOUT = 8;
 
     private DrawerLayout mDrawer;
 
     private WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
     private ListView mListView;
+
+    private Map<Integer, Class> fraClazzs = new HashMap<Integer, Class>();
+    private FragmentFactory fragmentFactory;
+
+    private FragmentManager fm;
+    private int currentFragment = 0;
 
     @Override
     public void initView(Bundle savedInstanceState) {
@@ -46,7 +68,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mWaveSwipeRefreshLayout.setWaveColor(ToolUI.getColor(R.color.orange));
         /**************************/
 
-        mListView = (ListView) findViewById(R.id.main_list);
+//        mListView = (ListView) findViewById(R.id.main_list);
 
 //        findViewById(R.id.button_of_wave_color).setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -57,6 +79,26 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.l_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        /***************右菜单*****************/
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        fraClazzs.put(FRAGMENT_RIGHT, MenuRightFragment.class);
+        fraClazzs.put(FRAGMENT_HOME, HomeFragment.class);
+        fm = getSupportFragmentManager();
+        fragmentFactory = new FragmentFactory(fraClazzs);
+        setCurrentFragmentById(FRAGMENT_HOME);
+
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.main_right, fragmentFactory.getFragent(FRAGMENT_RIGHT)).commit();
+    }
+
+    private void setCurrentFragmentById(int index) {
+            FragmentTransaction transaction = fm.beginTransaction();
+            transaction.replace(R.id.main_fra, fragmentFactory.getFragent(index)).commit();
+            currentFragment = index;
     }
 
     @Override

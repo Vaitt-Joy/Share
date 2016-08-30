@@ -136,6 +136,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
                 break;
             case R.id.cancel_login:
                 ToolUI.nextPage(this,MainActivity.class);
+                finish();
                 break;
         }
     }

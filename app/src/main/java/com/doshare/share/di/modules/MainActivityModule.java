@@ -2,7 +2,6 @@ package com.doshare.share.di.modules;
 
 
 import com.doshare.share.di.scope.UserScope;
-import com.doshare.share.domain.WeatherApiService;
 import com.doshare.share.mvp.presenter.HomeViewPresenter;
 import com.doshare.share.mvp.presenter.HomeViewPresenterImpl;
 import com.doshare.share.mvp.presenter.RightChatViewPresenter;
@@ -12,7 +11,6 @@ import com.doshare.share.mvp.views.RightChatView;
 
 import dagger.Module;
 import dagger.Provides;
-import retrofit2.Retrofit;
 
 
 @UserScope
@@ -22,7 +20,7 @@ public class MainActivityModule {
     private RightChatView rightChatView;
 
     public MainActivityModule(HomeView view) {
-        this.view = view;//%B9%E3%D6%DD%
+        this.view = view;
     }
 
     public MainActivityModule(RightChatView rightChatView){
@@ -41,13 +39,8 @@ public class MainActivityModule {
 
 
     @Provides
-    public WeatherApiService provideHomeApi(Retrofit restAdapter) {
-        return restAdapter.create(WeatherApiService.class);
-    }
-
-    @Provides
-    public HomeViewPresenter providePresenter(HomeView homeView, WeatherApiService weatherApiService) {
-        return new HomeViewPresenterImpl(homeView,weatherApiService);
+    public HomeViewPresenter providePresenter(HomeView homeView) {
+        return new HomeViewPresenterImpl(homeView);
     }
 
     @Provides
