@@ -2,16 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/divider"
-    android:layout_marginTop="20dp">
+    android:background="@mipmap/vz_right_bg"
+    android:orientation="vertical">
 
     <!--文字标题-->
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:text="消息" />
+        android:layout_height="30dp"
+        android:text=""
+        android:enabled="false"
+        android:visibility="visible" />
 
     <!--朋友圈-->
 
@@ -20,19 +20,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="@string/friend_cricle"
-        android:padding="5dp"
-        android:gravity="center_vertical"
-        android:drawablePadding="5dp"
         android:background="@drawable/gray_tv_sricle_bg"
-        android:textSize="12sp"
-        android:drawableLeft="@drawable/friendcricle_selector" />
+        android:drawableLeft="@drawable/friendcricle_selector"
+        android:drawablePadding="5dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        android:text="@string/friend_cricle"
+        android:textSize="@dimen/textSize16sp" />
 
     <!--消息列表-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/right_recycle"
-        android:layout_width="match_parent" android:background="@color/divider"
-        android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
 
     </android.support.v7.widget.RecyclerView>
 

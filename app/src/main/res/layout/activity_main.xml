@@ -16,34 +16,19 @@
         android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:fitsSystemWindows="true"
         android:tag="LEFT"
         app:headerLayout="@layout/nav_header_main"
+        app:itemIconTint="@color/primary_light"
+        app:itemTextColor="@color/primary_light"
+        app:itemTextAppearance="@dimen/textSize16sp"
         app:menu="@menu/activity_main_drawer" />
 
-    <!--<fragment
-        android:id="@+id/id_right_menu"
-        android:name="com.doshare.share.ui.fra.MenuRightFragment"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        android:tag="RIGHT" />-->
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout
         android:id="@+id/main_right"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        android:tag="RIGHT"
-        android:fadeScrollbars="true"
-        android:background="@mipmap/vz_right_bg"/>
-
-   <!-- <android.support.design.widget.NavigationView
-        android:id="@+id/r_nav_view"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        android:tag="RIGHT"
-        android:fadeScrollbars="true"
-        android:background="@mipmap/vz_right_bg"
-        app:headerLayout="@layout/menu_layout_right" />-->
+        android:tag="RIGHT" />
 
 </android.support.v4.widget.DrawerLayout>

@@ -14,7 +14,7 @@ import android.view.ViewGroup;
  */
 public abstract class BaseFragment extends Fragment {
 
-    private View rootView;//
+    public View rootView;//
     public Context mContext;// 上下文
     protected final String TAG = this.getClass().getSimpleName();
 

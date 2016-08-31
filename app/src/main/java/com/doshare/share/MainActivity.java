@@ -17,9 +17,10 @@ import android.widget.ListView;
 
 import com.doshare.share.ui.act.base.BaseActivity;
 import com.doshare.share.ui.fra.HomeFragment;
-import com.doshare.share.ui.fra.MenuRightFragment;
+import com.doshare.share.ui.fra.HotFragment;
+import com.doshare.share.ui.fra.RightChatFragment;
+import com.doshare.share.ui.fra.ShareBookFragment;
 import com.doshare.share.ui.fra.base.FragmentFactory;
-import com.doshare.share.utils.ToolUI;
 import com.doshare.share.widget.WaveSwipeRefreshLayout.WaveSwipeRefreshLayout;
 import com.nineoldandroids.view.ViewHelper;
 
@@ -31,13 +32,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     public final int FRAGMENT_RIGHT = 0;// 右菜单
     public final int FRAGMENT_HOME = 1;// 主页
-    public final int FRAGMENT_FIND = 2;
+    public final int FRAGMENT_SHAREBOOK = 2;// 阅享
+    public final int FRAGMENT_HOT = 3;// 精选
     public final int FRAGMENT_ME = 4;
     private final int FRAGMENT_NICKNAME = 5;
     private final int FRAGMENT_INSTRUCTIONS = 7;
     private final int FRAGMENT_ABOUT = 8;
 
     private DrawerLayout mDrawer;
+    private Toolbar toolbar;
 
     private WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
     private ListView mListView;
@@ -51,9 +54,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        toolbar.setTitle("首页");setSupportActionBar(toolbar);
+        toolbar.setTitle(R.string.menu_home);
+        setSupportActionBar(toolbar);
 
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -65,7 +69,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) findViewById(R.id.main_wave);
         mWaveSwipeRefreshLayout.setColorSchemeColors(Color.GRAY);
         mWaveSwipeRefreshLayout.setOnRefreshListener(this);
-        mWaveSwipeRefreshLayout.setWaveColor(ToolUI.getColor(R.color.orange));
+        mWaveSwipeRefreshLayout.setShadowRadius(0);
         /**************************/
 
 //        mListView = (ListView) findViewById(R.id.main_list);
@@ -79,14 +83,18 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.l_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemTextColor(null);
+        navigationView.setItemIconTintList(null);
         /***************右菜单*****************/
     }
 
     @Override
     protected void initData() {
         super.initData();
-        fraClazzs.put(FRAGMENT_RIGHT, MenuRightFragment.class);
+        fraClazzs.put(FRAGMENT_RIGHT, RightChatFragment.class);
         fraClazzs.put(FRAGMENT_HOME, HomeFragment.class);
+        fraClazzs.put(FRAGMENT_SHAREBOOK, ShareBookFragment.class);
+        fraClazzs.put(FRAGMENT_HOT, HotFragment.class);
         fm = getSupportFragmentManager();
         fragmentFactory = new FragmentFactory(fraClazzs);
         setCurrentFragmentById(FRAGMENT_HOME);
@@ -96,9 +104,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void setCurrentFragmentById(int index) {
-            FragmentTransaction transaction = fm.beginTransaction();
-            transaction.replace(R.id.main_fra, fragmentFactory.getFragent(index)).commit();
-            currentFragment = index;
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.main_fra, fragmentFactory.getFragent(index)).commit();
+        currentFragment = index;
     }
 
     @Override
@@ -120,17 +128,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     //ViewHelper.setScaleY(mMenu, leftScale);
                     //ViewHelper.setAlpha(mMenu, 0.6f + 0.4f * (1 - scale));
                     ViewHelper.setTranslationX(mContent, mMenu.getMeasuredWidth() * (1 - scale));
-                    ViewHelper.setPivotX(mContent, 0);
-                    ViewHelper.setPivotY(mContent, mContent.getMeasuredHeight() / 2);
+//                    ViewHelper.setPivotX(mContent, 0);
+//                    ViewHelper.setPivotY(mContent, mContent.getMeasuredHeight() / 2);
+//                    ViewHelper.setScaleX(mContent, rightScale);
                     mContent.invalidate();
-                    ViewHelper.setScaleX(mContent, rightScale);
                     //ViewHelper.setScaleY(mDrawer.getChildAt(1), ToolUI.getStatusBarHeight(getBaseContext()));
                 } else {
                     //ViewHelper.setAlpha(mMenu, 0.6f + 0.4f * (1 - scale));
                     ViewHelper.setTranslationX(mContent, -mMenu.getMeasuredWidth() * slideOffset);
                     //ViewHelper.setPivotX(mContent, mContent.getMeasuredWidth());
                     mContent.invalidate();
-                   // ViewHelper.setScaleX(mContent, rightScale);
+                    // ViewHelper.setScaleX(mContent, rightScale);
                     //ViewHelper.setScaleY(mContent, rightScale);
 
                 }
@@ -193,17 +201,24 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_home) {
+            setCurrentFragmentById(FRAGMENT_HOME);
+            toolbar.setTitle(R.string.menu_home);
+        } else if (id == R.id.nav_book) {
+            setCurrentFragmentById(FRAGMENT_SHAREBOOK);
+            toolbar.setTitle(R.string.menu_book);
+        } else if (id == R.id.nav_hot) {
+            setCurrentFragmentById(FRAGMENT_HOT);
+            toolbar.setTitle(R.string.menu_hot);
+        } else if (id == R.id.nav_forum) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_help) {
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_about_us) {
+
+        } else if (id == R.id.nav_setting) {
 
         }
 
