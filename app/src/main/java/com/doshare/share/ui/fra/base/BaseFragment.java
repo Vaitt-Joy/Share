@@ -22,7 +22,6 @@ public abstract class BaseFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
-
     }
 
     @Override
@@ -52,8 +51,6 @@ public abstract class BaseFragment extends Fragment {
     protected void initData() {
 
     }
-
-    ;
 
     /**
      * 初始事件

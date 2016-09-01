@@ -6,9 +6,11 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.doshare.share.constants.MyConstants;
 import com.doshare.share.di.component.AppComponent;
 import com.doshare.share.di.component.DaggerAppComponent;
 import com.doshare.share.di.modules.AppModule;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.lang.ref.WeakReference;
 import java.util.Stack;
@@ -44,6 +46,7 @@ public class MyApp extends Application {
         initBmob();
         mAppComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
         mAppComponent.inject(this);
+        CrashReport.initCrashReport(getApplicationContext(), MyConstants.BUGLY_APP_ID, false);
         initBaiDuMap();
         initShare();
     }

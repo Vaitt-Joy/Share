@@ -70,7 +70,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
 
     @Override
     public void destroy() {
-
+        ButterKnife.unbind(this);
     }
 
 
@@ -115,14 +115,14 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
         ToolToast.showLong("qqLogin");
     }
 
-    @OnClick({R.id.sign_in_button, R.id.login_error, R.id.register_now, R.id.qq_login, R.id.weixin_login, R.id.weibo_login,R.id.cancel_login})
+    @OnClick({R.id.sign_in_button, R.id.login_error, R.id.register_now, R.id.qq_login, R.id.weixin_login, R.id.weibo_login, R.id.cancel_login})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.qq_login:
                 qqLogin();
                 break;
             case R.id.weixin_login:
-               weiXinLogin();
+                weiXinLogin();
                 break;
             case R.id.weibo_login:
                 weiBoLogin();
@@ -135,7 +135,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
             case R.id.register_now:
                 break;
             case R.id.cancel_login:
-                ToolUI.nextPage(this,MainActivity.class);
+                ToolUI.nextPage(this, MainActivity.class);
                 finish();
                 break;
         }

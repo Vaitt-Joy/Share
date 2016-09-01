@@ -3,15 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.doshare.share.widget.WaveSwipeRefreshLayout.WaveSwipeRefreshLayout
-        android:id="@+id/main_wave"
+    <FrameLayout
+        android:id="@+id/main_fra"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <FrameLayout
-            android:id="@+id/main_fra"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </com.doshare.share.widget.WaveSwipeRefreshLayout.WaveSwipeRefreshLayout>
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

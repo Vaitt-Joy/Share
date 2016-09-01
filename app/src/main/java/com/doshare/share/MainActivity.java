@@ -2,7 +2,6 @@ package com.doshare.share;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,37 +12,33 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 
 import com.doshare.share.ui.act.base.BaseActivity;
+import com.doshare.share.ui.fra.ForumFragment;
 import com.doshare.share.ui.fra.HomeFragment;
 import com.doshare.share.ui.fra.HotFragment;
 import com.doshare.share.ui.fra.RightChatFragment;
 import com.doshare.share.ui.fra.ShareBookFragment;
 import com.doshare.share.ui.fra.base.FragmentFactory;
-import com.doshare.share.widget.WaveSwipeRefreshLayout.WaveSwipeRefreshLayout;
 import com.nineoldandroids.view.ViewHelper;
 
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, WaveSwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public final int FRAGMENT_RIGHT = 0;// 右菜单
     public final int FRAGMENT_HOME = 1;// 主页
     public final int FRAGMENT_SHAREBOOK = 2;// 阅享
     public final int FRAGMENT_HOT = 3;// 精选
-    public final int FRAGMENT_ME = 4;
+    public final int FRAGMENT_FORUM = 4;// 论坛
     private final int FRAGMENT_NICKNAME = 5;
     private final int FRAGMENT_INSTRUCTIONS = 7;
     private final int FRAGMENT_ABOUT = 8;
 
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
-
-    private WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
-    private ListView mListView;
 
     private Map<Integer, Class> fraClazzs = new HashMap<Integer, Class>();
     private FragmentFactory fragmentFactory;
@@ -65,22 +60,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mDrawer.setScrimColor(Color.TRANSPARENT);
         toggle.syncState();
 
-        /************* 下拉控件*************/
-        mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) findViewById(R.id.main_wave);
-        mWaveSwipeRefreshLayout.setColorSchemeColors(Color.GRAY);
-        mWaveSwipeRefreshLayout.setOnRefreshListener(this);
-        mWaveSwipeRefreshLayout.setShadowRadius(0);
-        /**************************/
-
-//        mListView = (ListView) findViewById(R.id.main_list);
-
-//        findViewById(R.id.button_of_wave_color).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mWaveSwipeRefreshLayout.setWaveColor(0xFF000000+new Random().nextInt(0xFFFFFF)); // Random assign
-//            }
-//        });
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.l_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemTextColor(null);
@@ -95,6 +74,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         fraClazzs.put(FRAGMENT_HOME, HomeFragment.class);
         fraClazzs.put(FRAGMENT_SHAREBOOK, ShareBookFragment.class);
         fraClazzs.put(FRAGMENT_HOT, HotFragment.class);
+        fraClazzs.put(FRAGMENT_FORUM, ForumFragment.class);
         fm = getSupportFragmentManager();
         fragmentFactory = new FragmentFactory(fraClazzs);
         setCurrentFragmentById(FRAGMENT_HOME);
@@ -119,28 +99,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 View mMenu = drawerView;
                 float scale = 1 - slideOffset;
                 float rightScale = 0.8f + scale * 0.2f;
-
                 if (drawerView.getTag().equals("LEFT")) {
-
                     float leftScale = 1 - 0.3f * scale;
-
-                    //ViewHelper.setScaleX(mMenu, leftScale);
-                    //ViewHelper.setScaleY(mMenu, leftScale);
-                    //ViewHelper.setAlpha(mMenu, 0.6f + 0.4f * (1 - scale));
                     ViewHelper.setTranslationX(mContent, mMenu.getMeasuredWidth() * (1 - scale));
-//                    ViewHelper.setPivotX(mContent, 0);
-//                    ViewHelper.setPivotY(mContent, mContent.getMeasuredHeight() / 2);
-//                    ViewHelper.setScaleX(mContent, rightScale);
                     mContent.invalidate();
-                    //ViewHelper.setScaleY(mDrawer.getChildAt(1), ToolUI.getStatusBarHeight(getBaseContext()));
                 } else {
-                    //ViewHelper.setAlpha(mMenu, 0.6f + 0.4f * (1 - scale));
                     ViewHelper.setTranslationX(mContent, -mMenu.getMeasuredWidth() * slideOffset);
-                    //ViewHelper.setPivotX(mContent, mContent.getMeasuredWidth());
                     mContent.invalidate();
-                    // ViewHelper.setScaleX(mContent, rightScale);
-                    //ViewHelper.setScaleY(mContent, rightScale);
-
                 }
             }
 
@@ -211,7 +176,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             setCurrentFragmentById(FRAGMENT_HOT);
             toolbar.setTitle(R.string.menu_hot);
         } else if (id == R.id.nav_forum) {
-
+            setCurrentFragmentById(FRAGMENT_FORUM);
+            toolbar.setTitle(R.string.menu_forum);
         } else if (id == R.id.nav_help) {
 
         } else if (id == R.id.nav_share) {
@@ -246,15 +212,5 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
         }
         return true;
-    }
-
-    @Override
-    public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mWaveSwipeRefreshLayout.setRefreshing(false);
-            }
-        }, 3000);
     }
 }

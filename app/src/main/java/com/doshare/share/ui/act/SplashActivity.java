@@ -28,9 +28,9 @@ public class SplashActivity extends BaseActivity {
         String password = ToolSp.getString(this, MyConstants.PASSWORD, "");
 
         if (!TextUtils.isEmpty(password) && !(ToolNetwork.getNetworkState(this) == ToolNetwork.NETWORN_NONE)) {
-            mHandler.postDelayed(gotoMainAct, 3000);
+            mHandler.postDelayed(gotoMainAct, 1500);
         } else {
-            mHandler.postDelayed(gotoLoginAct, 3000);
+            mHandler.postDelayed(gotoLoginAct, 1500);
         }
     }
 

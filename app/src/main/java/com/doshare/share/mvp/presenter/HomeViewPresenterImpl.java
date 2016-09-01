@@ -14,11 +14,9 @@ import java.util.List;
  */
 public class HomeViewPresenterImpl implements HomeViewPresenter {
     private final HomeView homeView;
-    //private final WeatherApiService weatherApiService;
 
     public HomeViewPresenterImpl(HomeView homeView) {
         this.homeView = homeView;
-       // this.weatherApiService = weatherApiService;
     }
 
 
